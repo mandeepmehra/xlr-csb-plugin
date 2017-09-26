@@ -1,4 +1,4 @@
-import sqlite3
+#import sqlite3
 import csv
 import httplib
 import sys
@@ -13,10 +13,10 @@ CSB_API_TOKEN='UZIQodYj/0czMcr4QdnHdiWI0o2xiKvHLqBGdM3shg8='
 
 reader = csv.reader(open(FILE_PATH + PATH_SEP + FILE_NAME), delimiter=',')
 
-dbConn = sqlite3.connect('data/1.db')
-cursor = dbConn.cursor()
-cursor.execute('''CREATE TABLE data
-             (account text, user text, product text, module text, feature text, timestamp text, uploaded text)''')
+#dbConn = sqlite3.connect('data/1.db')
+#cursor = dbConn.cursor()
+#cursor.execute('''CREATE TABLE data
+#             (account text, user text, product text, module text, feature text, timestamp text, uploaded text)''')
 
 for row in reader :
   account   = row[0]
@@ -26,11 +26,10 @@ for row in reader :
   feature   = row[4]
   timestamp = row[5]	
   
-  insertSql = "insert into data values('%s','%s','%s','%s','%s','%s','N')" % (account, user, product, module, feature, timestamp)
-  print insertSql
-  cursor.execute(insertSql)
- 
-  continue
+  #insertSql = "insert into data values('%s','%s','%s','%s','%s','%s','N')" % (account, user, product, module, feature, timestamp)
+  #print insertSql
+  #cursor.execute(insertSql)
+  #continue
  
   data = {"account_id" : account,"user_id": user, "product_id":product, "module_id": module, "feature_id": feature, "timestamp" : timestamp }
   print "Sending data .." + str(data)

@@ -3,6 +3,6 @@
 	xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<type type="customerSuccessBox.Config" extends="configuration.HttpConnection">
 		<property name="customerName" />
-		<property name="token" password="true" />
+		<property name="token" />
 	</type>
 </synthetic>         
