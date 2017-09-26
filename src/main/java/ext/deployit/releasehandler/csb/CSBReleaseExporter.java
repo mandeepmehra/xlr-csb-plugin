@@ -36,20 +36,30 @@ public class CSBReleaseExporter implements ReleaseExporter {
 
 	private static final Logger logger = LoggerFactory.getLogger(CSBLogEntry.class);
 
-	public void intializeCSBParams() {
+	public void intializeCSBParams() throws CSBLogException {
 		final Configuration csbConfig = getCSBConfig();
 		if (csbConfig == null) {
-			logger.error("customerSuccessBox.Config not initialized");
-			return;
+			throw new CSBLogException("customerSuccessBox.Config not initialized");
 		}
 		clientName = csbConfig.getProperty("customerName");
 		CSB_URL = csbConfig.getProperty("url");
 		CSB_API_TOKEN = csbConfig.getProperty("token");
 
 	}
+	
+	public Configuration getCSBConfig() {
+		final ConfigurationApi configurationApi = XLReleaseServiceHolder.getConfigurationApi();
+		List<Configuration> configurations = configurationApi.searchByTypeAndTitle(CSB_CONFIG_TYPE, CSB_CONFIG_TITLE);
+		Configuration csbConfig = null;
+		for (Configuration config : configurations) {
+			csbConfig = config;
+			break;
+		}
+		return csbConfig;
+	}
 
 	@Override
-	public void exportRelease(final Release release) {
+	public void exportRelease(final Release release) throws CSBLogException {
 
 		intializeCSBParams();
 		CSBLogEntry logEntry = getCSBLogEntryInstance(release);
@@ -82,8 +92,7 @@ public class CSBReleaseExporter implements ReleaseExporter {
 	private void sendToCSBWeb(final CSBLogEntry logEntry) throws CSBLogException {
 		try {
 			logger.debug("Sending Release event to CSB API : {}{}", CSB_URL, CSB_FEATURE_API);
-			
-			
+
 			Client client = ClientBuilder.newClient();
 
 			String payload = "{\"account_id\": \"" + logEntry.getClientName() + "\",  \"user_id\": \""
@@ -108,17 +117,6 @@ public class CSBReleaseExporter implements ReleaseExporter {
 		} catch (Exception ex) {
 			throw new CSBLogException(ex.getMessage());
 		}
-	}
-
-	private Configuration getCSBConfig() {
-		final ConfigurationApi configurationApi = XLReleaseServiceHolder.getConfigurationApi();
-		List<Configuration> configurations = configurationApi.searchByTypeAndTitle(CSB_CONFIG_TYPE, CSB_CONFIG_TITLE);
-		Configuration csbConfig = null;
-		for (Configuration config : configurations) {
-			csbConfig = config;
-			break;
-		}
-		return csbConfig;
 	}
 
 	public CSBLogEntry getCSBLogEntryInstance(final Release release) {

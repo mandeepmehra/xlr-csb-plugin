@@ -30,7 +30,11 @@ public class UpdateEventHandler extends ReleaseEventHandler {
 			logger.info("Exporting updated release {}", release.getId());
 			addToProcessedRelease(release);
 			// TODO: Start in new thread
-			releaseExporter.exportRelease(release);
+			try {
+				releaseExporter.exportRelease(release);
+			} catch (CSBLogException ex) {
+
+			}
 		}
 	}
 

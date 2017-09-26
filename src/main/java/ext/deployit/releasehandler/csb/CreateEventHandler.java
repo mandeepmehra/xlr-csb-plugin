@@ -29,9 +29,13 @@ public class CreateEventHandler extends ReleaseEventHandler {
 
 		logger.info("Exporting created release {}", release.getId());
 		addToProcessedRelease(release);
-		
-		//TODO: Start in new thread
-		releaseExporter.exportRelease(release);
+
+		// TODO: Start in new thread
+		try {
+			releaseExporter.exportRelease(release);
+		} catch (CSBLogException ex) {
+
+		}
 
 	}
 

@@ -12,6 +12,6 @@ public interface ReleaseExporter {
 	// logger.info("Release Initialized");
 	// }
 
-	public void exportRelease(final Release release);
+	public void exportRelease(final Release release) throws CSBLogException;
 
 }
