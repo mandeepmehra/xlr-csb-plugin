@@ -69,6 +69,7 @@ public class CSBReleaseExporter {
 				sendToCSBFile(csbConfiguration, logEntry);
 			}
 		} catch (CSBPluginException ex) {
+			logger.error("Error posting to web", ex);
 			logger.info("API not reachable, logging release event to file");
 			sendToCSBFile(csbConfiguration, logEntry);
 		}

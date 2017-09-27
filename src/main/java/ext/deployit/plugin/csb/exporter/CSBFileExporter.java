@@ -17,6 +17,14 @@ public class CSBFileExporter {
 		MDC.put("CSB_MODULE", logEntry.getModule());
 		MDC.put("CSB_FEATURE", logEntry.getFeature());
 		MDC.put("CSB_TIMESTAMP", logEntry.getTimestamp());
+
 		logger.info("Release event logged to file");
+
+		MDC.remove("CSB_CLIENT_NAME");
+		MDC.remove("CSB_USER");
+		MDC.remove("CSB_PRODUCT");
+		MDC.remove("CSB_MODULE");
+		MDC.remove("CSB_FEATURE");
+		MDC.remove("CSB_TIMESTAMP");
 	}
 }

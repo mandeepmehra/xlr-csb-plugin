@@ -17,6 +17,7 @@ public class CSBWebExporter {
 
 	private static final Logger logger = LoggerFactory.getLogger(CSBWebExporter.class);
 	private final static String CSB_SUCCESS_RESPONSE = "{\"success\":true}";
+	private final static String API_ENDPOINT = "/api/v1_1/feature";
 
 	public void logEntry(final CSBConfiguration csbConfiguration, final CSBLogEntry logEntry)
 			throws CSBPluginException {
@@ -33,7 +34,8 @@ public class CSBWebExporter {
 			logger.debug("CSB payload : {}", payload);
 
 			Entity<String> payloadEntity = Entity.json(payload);
-			Response response = webClient.target(csbConfiguration.getUrl()).request(MediaType.APPLICATION_JSON_TYPE)
+			Response response = webClient.target(csbConfiguration.getUrl() + API_ENDPOINT)
+					.request(MediaType.APPLICATION_JSON_TYPE)
 					.header("Authorization", "Bearer " + csbConfiguration.getAuthToken()).post(payloadEntity);
 
 			String responseBody = response.readEntity(String.class);

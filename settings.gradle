@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'cbs-xlr-export-plugin'
+rootProject.name = 'xlr-csb-plugin'

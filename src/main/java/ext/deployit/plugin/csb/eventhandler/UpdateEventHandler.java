@@ -34,6 +34,7 @@ public class UpdateEventHandler extends ReleaseEventHandler {
 				|| release.getStatus().toString().equalsIgnoreCase("Completed")) {
 			logger.info("Exporting updated release {}", release.getId());
 			addToProcessedRelease(release);
+			
 			// TODO: Start in new thread
 			try {
 				releaseExporter.exportRelease(release);
