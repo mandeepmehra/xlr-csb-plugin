@@ -1,4 +1,4 @@
-package ext.deployit.releasehandler.csb.util;
+package ext.deployit.plugin.csb.util;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

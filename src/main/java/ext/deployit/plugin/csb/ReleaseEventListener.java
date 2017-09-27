@@ -1,7 +1,4 @@
-package ext.deployit.releasehandler.csb;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+package ext.deployit.plugin.csb;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,15 +7,17 @@ import com.xebialabs.deployit.engine.spi.event.CisCreatedEvent;
 import com.xebialabs.deployit.engine.spi.event.CisUpdatedEvent;
 import com.xebialabs.deployit.engine.spi.event.DeployitEventListener;
 
+import ext.deployit.plugin.csb.eventhandler.CreateEventHandler;
+import ext.deployit.plugin.csb.eventhandler.ReleaseEventHandler;
+import ext.deployit.plugin.csb.eventhandler.UpdateEventHandler;
 import nl.javadude.t2bus.Subscribe;
 
 @DeployitEventListener
 public class ReleaseEventListener {
 
 	private static final Logger logger = LoggerFactory.getLogger(ReleaseEventListener.class);
-	private final CreateEventHandler createEventHandler = new CreateEventHandler();
-	private final UpdateEventHandler updateEventHandler = new UpdateEventHandler();
-	private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
+	private final ReleaseEventHandler createEventHandler = new CreateEventHandler();
+	private final ReleaseEventHandler updateEventHandler = new UpdateEventHandler();
 
 	@Subscribe
 	public void receiveCisCreated(CisCreatedEvent createEvent) {

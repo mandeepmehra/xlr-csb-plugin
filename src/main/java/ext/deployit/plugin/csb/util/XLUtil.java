@@ -1,4 +1,4 @@
-package ext.deployit.releasehandler.csb.util;
+package ext.deployit.plugin.csb.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +9,7 @@ import com.xebialabs.deployit.plugin.api.reflect.Type;
 import com.xebialabs.deployit.plugin.api.udm.ConfigurationItem;
 import com.xebialabs.xlrelease.domain.Release;
 
-public class ReleaseUtil {
+public class XLUtil {
 
 
 	public static boolean isConfigItemARelease(ConfigurationItem configItem) {

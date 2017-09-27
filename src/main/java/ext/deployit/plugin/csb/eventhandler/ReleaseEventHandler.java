@@ -1,4 +1,4 @@
-package ext.deployit.releasehandler.csb;
+package ext.deployit.plugin.csb.eventhandler;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 

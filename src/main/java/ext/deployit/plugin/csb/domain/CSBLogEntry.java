@@ -1,4 +1,4 @@
-package ext.deployit.releasehandler.csb.domain;
+package ext.deployit.plugin.csb.domain;
 
 public class CSBLogEntry {
 	private String clientName;
