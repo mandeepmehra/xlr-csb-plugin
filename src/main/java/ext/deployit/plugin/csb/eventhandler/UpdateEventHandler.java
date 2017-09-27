@@ -33,14 +33,21 @@ public class UpdateEventHandler extends ReleaseEventHandler {
 		if (release.getStatus().toString().equalsIgnoreCase("Aborted")
 				|| release.getStatus().toString().equalsIgnoreCase("Completed")) {
 			logger.info("Exporting updated release {}", release.getId());
-			addToProcessedRelease(release);
 			
-			// TODO: Start in new thread
-			try {
-				releaseExporter.exportRelease(release);
-			} catch (CSBPluginException ex) {
-				logger.error("Error in exporting release", ex);
-			}
+			addToProcessedRelease(release);
+
+			EXECUTOR_SERVICE.submit(new Runnable() {
+				public void run() {
+					try {
+						releaseExporter.exportRelease(release);
+					} catch (CSBPluginException exception) {
+						logger.error("Exception trying to export release: {}", exception);
+					} catch (Exception exception) {
+						logger.error("Generic Exception trying to export release: {}", release.getId(), exception);
+					}
+				}
+			});
+
 		}
 	}
 
